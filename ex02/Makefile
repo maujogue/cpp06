@@ -1,4 +1,4 @@
-.PHONY:					all $(NAME) clear mkbuild clear clean fclean re sanitize
+ .PHONY:					all $(NAME) clear mkbuild clear clean fclean re sanitize
 
 RED			            = \033[1;31m
 GREEN					= \033[1;32m
@@ -9,15 +9,15 @@ BG_RED	 				= \033[41m
 BG_GREEN 				= \033[42m
 BG_BLUE 				= \033[46m
 
-NAME					= ScalarConverter
+NAME					= Identify
 
 BUILD_DIR				= build/
 
-HEADER_DIR				= header/
-HEADER_FILES			=	ScalarConverter.hpp
+HEADER_DIR				= header
+HEADER_FILES			=	Identify.hpp
 
 DIR						=	src/
-SRC						=	main.cpp	ScalarConverter.cpp
+SRC						=	main.cpp	Identify.cpp
 
 OBJECTS					= $(SRC:%.cpp=$(BUILD_DIR)%.o)
 
@@ -28,10 +28,10 @@ SANITIZE				= $(CFLAGS) -g3 -fsanitize=address
 RM 						= rm -rf
 CLEAR					= clear
 
-$(BUILD_DIR)%.o: 		$(DIR)%.cpp $(HEADER_DIR)* Makefile
+$(BUILD_DIR)%.o: 		$(DIR)%.cpp $(HEADER_DIR) Makefile
 						@mkdir -p $(@D)
-						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I/usr/include -O3 -c $< -o $@
-						@echo "$(BG_BLUE)[CREATE]$(EOC) $@"
+						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I/usr/include -c $< -o $@
+						@echo "$(BG_BLUE)[CREATE]$( ) $@"
 
 
 all: 					clear mkbuild $(HEADER_DIR) $(NAME)
