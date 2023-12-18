@@ -22,7 +22,7 @@ void	ScalarConverter::convert(std::string str){
 		std::cout << "Literal must be displayable." << std::endl;
 		return ;
 	}
-	if (str.find('.') != str.rfind('.')) 							//check for double point : error
+	if (str.find('.') != str.rfind('.') || str.find(',') != std::string::npos) 							//check for double point : error
 	{
 		std::cout << "Error: invalid argument." << std::endl;
 		return ;
@@ -48,7 +48,7 @@ void	ScalarConverter::convert(std::string str){
 		i = static_cast<int>(c);
 		f = static_cast<float>(c);
 	}
-	else															//check if str is a int, float or double
+	else															//if str is an int, float or double
 	{
 		i = static_cast<int>(d);
 		f = static_cast<float>(d);
@@ -56,7 +56,6 @@ void	ScalarConverter::convert(std::string str){
 	}
 
 	//print results and check for limits/non-displayable
-
 	if (!std::isprint(c))
 		std::cout << "char: Non displayable" << std::endl;
 	else
@@ -69,11 +68,15 @@ void	ScalarConverter::convert(std::string str){
 
 	if (f < -FLT_MAX || f > FLT_MAX)
 		std::cout << "float: impossible" << std::endl;
-	else
+	else if (static_cast<float>(i) == f)
 		std::cout << "float: " << f << ".0f" << std::endl;
+	else
+		std::cout << "float: " << f << "f" << std::endl;
 
 	if (d < -DBL_MAX || d > DBL_MAX)
 		std::cout << "double: impossible" << std::endl;
-	else
+	else if (static_cast<double>(i) == d)
 		std::cout << "double: " << d << ".0" << std::endl;
+	else
+		std::cout << "double: " << d << std::endl;
 }
