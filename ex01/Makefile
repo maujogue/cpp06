@@ -14,7 +14,7 @@ NAME					= Serialization
 BUILD_DIR				= build/
 
 HEADER_DIR				= header/
-HEADER_FILES			=	Serializer.cpp
+HEADER_FILES			=	Serializer.hpp
 
 DIR						=	src/
 SRC						=	main.cpp	Serializer.cpp
